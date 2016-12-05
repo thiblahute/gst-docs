@@ -90,6 +90,11 @@ index.md
 			tutorials/ios/a-basic-media-player.md
 			tutorials/ios/a-complete-media-player.md
 		tutorials/table-of-concepts.md
+	testing/index.md
+		testing/integration-tests.md
+		testing/gst-validate.md
+		testing/gst-validate-transcoding.md
+		testing/gst-validate-media-check.md
 	deploying/index.md
 		deploying/mac-osx.md
 		deploying/windows.md
