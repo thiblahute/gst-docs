@@ -1,0 +1,1 @@
+option('gstreamer_core_api', type : 'boolean', value : false)
