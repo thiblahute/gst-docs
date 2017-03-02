@@ -1,1 +1,1 @@
-# GStreamer API documentations
+# API reference
