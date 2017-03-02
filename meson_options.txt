@@ -1,1 +1,1 @@
-option('gstreamer_core_api', type : 'boolean', value : false)
+option('built_subprojects', type : 'string', value : '')
