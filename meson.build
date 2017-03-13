@@ -30,14 +30,25 @@ endif
 sitemap_gen = find_program('generate_sitemap.py')
 cmdres = run_command(sitemap_gen, api_subprojs)
 if cmdres.returncode() != 0
-    error('Generating sitemap failed @0@: @1@'.format(sitemap_generator,
+    error('Generating sitemap failed @0@: @1@'.format(sitemap_gen,
         cmdres.stderr()))
 endif
+
+theme = subproject('hotdoc_bootstrap_theme',
+        default_options: ['less_include_path=' +
+            join_paths(meson.current_source_dir(), 'theme/less')]
+        )
 
 gstreamer_doc = hotdoc.generate_doc('GStreamer',
     project_version: '1.0',
     sitemap: 'generated_sitemap.txt',
     index: 'markdown/index.md',
     install: true,
-    dependencies: hotdoc_subprojects
+    extra_assets: [join_paths(meson.current_source_dir(), 'images')],
+    syntax_highlighting_activate: true,
+    html_theme: theme.get_variable('theme_dir'),
+    include_paths: join_paths(meson.current_source_dir(), 'examples'),
+    html_extra_theme: join_paths(meson.current_source_dir(), 'theme/extra'),
+    dependencies: hotdoc_subprojects + [theme.get_variable('theme_dep')] + [gst_dep],
+    disable_incremental_build: true,
 )
