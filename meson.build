@@ -14,9 +14,9 @@ if get_option('built_subprojects') != ''
             doc_json = project_name + '-doc.json'
             hotdoc_subprojects += [gst_sub.get_variable(doc_variable)]
             api_subprojs += '\n	' + doc_json
-            message('Building @0@ core API documentation'.format(project_name))
+            message('Building @0@ documentation'.format(project_name))
         else
-            message('@0@ did not build the hotdoc, can\'t build API doc'.format(project_name))
+            message('@0@ did not build hotdoc, can\'t build API doc'.format(project_name))
         endif
     endforeach
 endif
@@ -49,6 +49,8 @@ gstreamer_doc = hotdoc.generate_doc('GStreamer',
     html_theme: theme.get_variable('theme_dir'),
     include_paths: join_paths(meson.current_source_dir(), 'examples'),
     html_extra_theme: join_paths(meson.current_source_dir(), 'theme/extra'),
-    dependencies: hotdoc_subprojects + [theme.get_variable('theme_dep')] + [gst_dep],
+    dependencies: [theme.get_variable('theme_dep')] + [gst_dep],
+    subprojects: hotdoc_subprojects,
     disable_incremental_build: true,
+    gst_list_all_plugins: true,
 )

@@ -1,3 +1,8 @@
+---
+short-description: GStreamer documentation
+render-subpages: false
+...
+
 # GStreamer documentation
 
 Feel free to jump straight to the download section, start practicing
