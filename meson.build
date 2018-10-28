@@ -15,7 +15,6 @@ endif
 message('Got projects: ' + get_option('built_subprojects'))
 libs = ''
 plugins_doc = ''
-gst_plugins_path = ''
 deps = []
 if get_option('built_subprojects') != ''
     foreach project_name: get_option('built_subprojects').split(',')
@@ -31,10 +30,6 @@ if get_option('built_subprojects') != ''
             foreach plugin_doc: sub.get_variable('plugins_doc')
               plugins_doc += plugin_doc.full_path() + pathsep
               hotdoc_subprojects += [plugin_doc]
-            endforeach
-
-            foreach plugin_path: sub.get_variable('all_plugins_paths')
-              gst_plugins_path += plugin_path + pathsep
             endforeach
         else
             message('@0@ did not build hotdoc, can\'t build API doc'.format(project_name))
@@ -69,7 +64,6 @@ gstreamer_doc = hotdoc.generate_doc('GStreamer',
     subprojects: hotdoc_subprojects,
     disable_incremental_build: true,
     gst_list_plugins_page: 'plugins_doc.md',
-    gst_plugins_path: gst_plugins_path,
     default_license: 'CC-BY-SAv4.0',
     devhelp_activate: true,
 )
